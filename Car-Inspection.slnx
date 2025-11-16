@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/01. Domain/" />
+  <Folder Name="/01. Domain/AppService/">
+    <Project Path="src/01. Domain/AppService/Car-Inspection.Domain.AppService/Car-Inspection.Domain.AppService.csproj" />
+  </Folder>
+  <Folder Name="/01. Domain/Core/">
+    <Project Path="src/01. Domain/Core/Car-Inspection.Domain.Core/Car-Inspection.Domain.Core.csproj" />
+  </Folder>
+  <Folder Name="/01. Domain/Service/">
+    <Project Path="src/01. Domain/Service/Car-Inspection.Domain.Service/Car-Inspection.Domain.Service.csproj" />
+  </Folder>
+  <Folder Name="/02. Infrastructure/" />
+  <Folder Name="/02. Infrastructure/DataAccess/">
+    <Project Path="src/02. Infrastructure/DataAccess/Car-Inspection.Infa.Data.Repo.EfCore/Car-Inspection.Infa.Data.Repo.EfCore.csproj" />
+  </Folder>
+  <Folder Name="/02. Infrastructure/Db/">
+    <Project Path="src/02. Infrastructure/Db/Car-Inspection.Infa.Db.SqlServer.EfCore/Car-Inspection.Infa.Db.SqlServer.EfCore.csproj" />
+  </Folder>
+  <Folder Name="/03. EndPoint/">
+    <Project Path="src/03. EndPoint/Car-Inspection.EndPoint.Razor/Car-Inspection.EndPoint.Razor.csproj" />
+  </Folder>
+</Solution>
