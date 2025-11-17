@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Db\Car-Inspection.Infa.Db.SqlServer.EfCore\Car-Inspection.Infa.Db.SqlServer.EfCore.csproj" />
+  </ItemGroup>
+
 </Project>

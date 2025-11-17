@@ -11,6 +11,7 @@ public class RejectedAppointment : BaseEntity
     public int ProductionYear { get; set; } 
     public string? OwnerMobile { get; set; }
     public string? OwnerNationalId { get; set; }
+    public string Reason { get; set; }
 
 
     public int? CarModelId { get; set; } 

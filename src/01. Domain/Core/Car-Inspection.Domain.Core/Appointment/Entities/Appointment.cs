@@ -18,5 +18,5 @@ public class Appointment : BaseEntity
     public CarModel.Entities.CarModel CarModel { get; set; }
 
     public int? UserId { get; set; }
-    public User.Entities.User user { get; set; }
+    public User.Entities.User User { get; set; }
 }

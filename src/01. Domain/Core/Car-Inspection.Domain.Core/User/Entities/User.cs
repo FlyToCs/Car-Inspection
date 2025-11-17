@@ -11,4 +11,6 @@ public class User : BaseEntity
     public string UserName { get; set; }
     public string PasswordHash { get; set; }
     public RoleEnum Role { get; set; }
+
+    public List<Appointment.Entities.Appointment> Appointments { get; set; }
 }

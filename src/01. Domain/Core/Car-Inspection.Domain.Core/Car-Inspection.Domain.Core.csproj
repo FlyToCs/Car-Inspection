@@ -8,37 +8,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Appointment\AppServices\" />
     <Folder Include="Appointment\Data\" />
     <Folder Include="Appointment\DTOs\" />
     <Folder Include="Appointment\Services\" />
-    <Folder Include="CarModel\AppServices\" />
-    <Folder Include="CarModel\Data\" />
     <Folder Include="CarModel\DTOs\" />
     <Folder Include="CarModel\Enums\" />
     <Folder Include="CarModel\Services\" />
     <Folder Include="Company\AppServices\" />
-    <Folder Include="Company\Data\" />
     <Folder Include="Company\DTOs\" />
     <Folder Include="Company\Enums\" />
-    <Folder Include="Company\Services\" />
     <Folder Include="DateOverride\AppServices\" />
     <Folder Include="DateOverride\Data\" />
     <Folder Include="DateOverride\DTOs\" />
     <Folder Include="DateOverride\Enums\" />
-    <Folder Include="DateOverride\Services\" />
-    <Folder Include="RejectedAppointment\AppServices\" />
     <Folder Include="RejectedAppointment\Data\" />
     <Folder Include="RejectedAppointment\DTOs\" />
     <Folder Include="RejectedAppointment\Enums\" />
-    <Folder Include="RejectedAppointment\Services\" />
     <Folder Include="ScheduleRule\AppServices\" />
     <Folder Include="ScheduleRule\Data\" />
     <Folder Include="ScheduleRule\DTOs\" />
     <Folder Include="ScheduleRule\Enums\" />
     <Folder Include="ScheduleRule\Services\" />
     <Folder Include="User\AppServices\" />
-    <Folder Include="User\Data\" />
     <Folder Include="User\DTOs\" />
     <Folder Include="User\Entities\" />
     <Folder Include="User\Enums\" />
