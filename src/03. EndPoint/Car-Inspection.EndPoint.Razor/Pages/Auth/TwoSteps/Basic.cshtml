@@ -1,0 +1,72 @@
+@page
+@using Car_Inspection.EndPoint.Razor.Pages.Auth.TwoSteps
+@model Car_Inspection.EndPoint.Razor.Pages.Auth.TwoSteps.BasicModel
+@{
+  Layout = "Layouts/_BlankLayout";
+  ViewData["Title"] = "صفحات - تایید دو مرحله ای";
+}
+
+@section VendorStyles {
+  <link rel="stylesheet" href="~/vendor/libs/&#64;form-validation/umd/styles/index.min.css" />
+}
+
+@section VendorScripts {
+  <script src="~/vendor/libs/cleavejs/cleave.dist.js"></script>
+  <script src="~/vendor/libs/&#64;form-validation/umd/bundle/popular.min.js"></script>
+  <script src="~/vendor/libs/&#64;form-validation/umd/plugin-bootstrap5/index.min.js"></script>
+  <script src="~/vendor/libs/&#64;form-validation/umd/plugin-auto-focus/index.min.js"></script>
+}
+
+@section PageStyles {
+  <link rel="stylesheet" href="~/vendor/css/pages/page-auth.dist.css">
+}
+
+@section PageScripts {
+  <script src="~/js/pages-auth.dist.js"></script>
+  <script src="~/js/pages-auth-two-steps.dist.js"></script>
+}
+@* ************** Content ************** *@
+
+<div class="authentication-wrapper authentication-basic px-4">
+  <div class="authentication-inner py-4">
+    <!--  Two Steps Verification -->
+    <div class="card">
+      <div class="card-body">
+        <!-- Logo -->
+        <div class="app-brand justify-content-center mb-4 mt-2">
+          <a href="/" class="app-brand-link gap-2">
+            <span class="app-brand-logo demo">@await Html.PartialAsync("../_Partials/_Macros")</span>
+            <span class="app-brand-text demo text-body fw-bold ms-1">@TempData.Peek("appName")</span>
+          </a>
+        </div>
+        <!-- /Logo -->
+        <h4 class="mb-1 pt-2">تایید دو مرحله ای 💬</h4>
+        <p class="text-start mb-4"> ما یک کد تأیید به تلفن همراه شما ارسال کردیم. کد تایید ارسال شده را در فیلد زیر تایپ کنید.
+          <span class="fw-medium d-block mt-2">
+            <bdi>******1234</bdi>
+          </span>
+        </p>
+        <p class="mb-0 fw-medium">کد امنیتی 6 رقمی</p>
+        <form id="twoStepsForm" action="~/" method="GET">
+          <div class="mb-3">
+            <div class="auth-input-wrapper d-flex align-items-center justify-content-sm-between numeral-mask-wrapper ltr">
+              <input type="tel" class="form-control auth-input h-px-50 text-center numeral-mask mx-1 my-2" maxlength="1" autofocus>
+              <input type="tel" class="form-control auth-input h-px-50 text-center numeral-mask mx-1 my-2" maxlength="1">
+              <input type="tel" class="form-control auth-input h-px-50 text-center numeral-mask mx-1 my-2" maxlength="1">
+              <input type="tel" class="form-control auth-input h-px-50 text-center numeral-mask mx-1 my-2" maxlength="1">
+              <input type="tel" class="form-control auth-input h-px-50 text-center numeral-mask mx-1 my-2" maxlength="1">
+              <input type="tel" class="form-control auth-input h-px-50 text-center numeral-mask mx-1 my-2" maxlength="1">
+            </div>
+            <!-- Create a hidden field which is combined by 3 fields above -->
+            <input type="hidden" name="otp" />
+          </div>
+          <button class="btn btn-primary d-grid w-100 mb-3">تایید حساب کاربری</button>
+          <div class="text-center"> کد را دریافت نکردید؟
+            <a href="javascript:void(0);"> ارسال مجدد</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- / Two Steps Verification -->
+  </div>
+</div>

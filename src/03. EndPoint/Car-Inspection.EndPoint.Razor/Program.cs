@@ -1,8 +1,14 @@
+using System;
+using Car_Inspection.Infa.Db.SqlServer.EfCore.DbContext;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
