@@ -8,32 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Appointment\Data\" />
-    <Folder Include="Appointment\DTOs\" />
-    <Folder Include="Appointment\Services\" />
-    <Folder Include="CarModel\DTOs\" />
-    <Folder Include="CarModel\Enums\" />
-    <Folder Include="CarModel\Services\" />
-    <Folder Include="Company\AppServices\" />
-    <Folder Include="Company\DTOs\" />
-    <Folder Include="Company\Enums\" />
-    <Folder Include="DateOverride\AppServices\" />
-    <Folder Include="DateOverride\Data\" />
-    <Folder Include="DateOverride\DTOs\" />
-    <Folder Include="DateOverride\Enums\" />
-    <Folder Include="RejectedAppointment\Data\" />
-    <Folder Include="RejectedAppointment\DTOs\" />
-    <Folder Include="RejectedAppointment\Enums\" />
-    <Folder Include="ScheduleRule\AppServices\" />
-    <Folder Include="ScheduleRule\Data\" />
-    <Folder Include="ScheduleRule\DTOs\" />
-    <Folder Include="ScheduleRule\Enums\" />
-    <Folder Include="ScheduleRule\Services\" />
-    <Folder Include="User\AppServices\" />
-    <Folder Include="User\DTOs\" />
-    <Folder Include="User\Entities\" />
-    <Folder Include="User\Enums\" />
-    <Folder Include="User\Services\" />
+    <Folder Include="User\NewFolder\" />
   </ItemGroup>
 
 </Project>

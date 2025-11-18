@@ -598,23 +598,23 @@
                   </li>
                 </ul>
               </li>
-              <li class='menu-item@(currentPage.StartsWith("/Auth/Register") ? " active" : "")'>
+              <li class='menu-item@(currentPage.StartsWith("/Auth/Create") ? " active" : "")'>
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <div data-i18n="Register">عضویت</div>
+            <div data-i18n="Create">عضویت</div>
                 </a>
                 <ul class="menu-sub">
-                  <li class='menu-item@(currentPage == "/Auth/Register/Basic" ? " active" : "")'>
-                    <a asp-page="/Auth/Register/Basic" class="menu-link" target="_blank">
+                  <li class='menu-item@(currentPage == "/Auth/Create/Basic" ? " active" : "")'>
+                    <a asp-page="/Auth/Create/Basic" class="menu-link" target="_blank">
                 <div data-i18n="Basic">پایه</div>
                     </a>
                   </li>
-                  <li class='menu-item@(currentPage == "/Auth/Register/Cover" ? " active" : "")'>
-                    <a asp-page="/Auth/Register/Cover" class="menu-link" target="_blank">
+                  <li class='menu-item@(currentPage == "/Auth/Create/Cover" ? " active" : "")'>
+                    <a asp-page="/Auth/Create/Cover" class="menu-link" target="_blank">
                 <div data-i18n="Cover">کاور</div>
                     </a>
                   </li>
-                  <li class='menu-item@(currentPage == "/Auth/Register/Multisteps" ? " active" : "")'>
-                    <a asp-page="/Auth/Register/Multisteps" class="menu-link" target="_blank">
+                  <li class='menu-item@(currentPage == "/Auth/Create/Multisteps" ? " active" : "")'>
+                    <a asp-page="/Auth/Create/Multisteps" class="menu-link" target="_blank">
                       <div data-i18n="Multi-steps">Multi-steps</div>
                     </a>
                   </li>

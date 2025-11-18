@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Framework/">
+    <Project Path="Framework/Car-Inspection.Framework/Car-Inspection.Framework.csproj" Id="dd474314-f053-4267-a834-b511c78a4a39" />
+  </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/01. Domain/" />
   <Folder Name="/src/01. Domain/AppService/">

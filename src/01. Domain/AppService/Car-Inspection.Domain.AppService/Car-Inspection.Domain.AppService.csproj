@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Framework\Car-Inspection.Framework\Car-Inspection.Framework.csproj" />
+    <ProjectReference Include="..\..\Core\Car-Inspection.Domain.Core\Car-Inspection.Domain.Core.csproj" />
+  </ItemGroup>
+
 </Project>
