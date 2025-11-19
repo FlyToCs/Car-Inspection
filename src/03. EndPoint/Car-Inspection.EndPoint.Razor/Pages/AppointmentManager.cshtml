@@ -62,7 +62,7 @@
             {
                 <tr>
                     <td>@appointment.Id</td>
-                        <td>@appointment.</td>
+                        <td>@appointment.OwnerFirstName @appointment.OwnerLastName</td>
                     <td>@appointment.AppointmentDate.ToString("yyyy/MM/dd")</td>
                     <td>@appointment.LicensePlate</td>
                     <td>@appointment.ProductionYear</td>
@@ -72,7 +72,8 @@
                     <td>@appointment.CarModelId</td>
                     <td>
                         <!-- Example: Edit/Delete buttons -->
-                        <button class="btn btn-sm btn-primary">ویرایش</button>
+                        <button class="btn btn-sm btn-success">تایید</button>
+                        <button class="btn btn-sm btn-primary">رد</button>
                         <button class="btn btn-sm btn-danger">حذف</button>
                     </td>
                 </tr>
