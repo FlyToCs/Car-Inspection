@@ -11,7 +11,7 @@ public class Appointment : BaseEntity
     public string OwnerMobile { get; set; }
     public string OwnerNationalId { get; set; }
     public string OwnerAddress { get; set; }
-    public AppointmentStatus Status { get; set; } = AppointmentStatus.Pending;
+    public AppointmentStatus Status { get; set; }
     public string? RejectionReason { get; set; }
 
     public int CarModelId { get; set; }
@@ -19,4 +19,5 @@ public class Appointment : BaseEntity
 
     public int? UserId { get; set; }
     public User.Entities.User User { get; set; }
+
 }

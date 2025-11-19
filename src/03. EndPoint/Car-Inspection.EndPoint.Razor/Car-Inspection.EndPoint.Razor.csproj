@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\01. Domain\AppService\Car-Inspection.Domain.AppService\Car-Inspection.Domain.AppService.csproj" />
+    <ProjectReference Include="..\..\01. Domain\Service\Car-Inspection.Domain.Service\Car-Inspection.Domain.Service.csproj" />
+    <ProjectReference Include="..\..\02. Infrastructure\DataAccess\Car-Inspection.Infa.Data.Repo.EfCore\Car-Inspection.Infa.Data.Repo.EfCore.csproj" />
     <ProjectReference Include="..\..\02. Infrastructure\Db\Car-Inspection.Infa.Db.SqlServer.EfCore\Car-Inspection.Infa.Db.SqlServer.EfCore.csproj" />
   </ItemGroup>
 

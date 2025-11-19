@@ -1,24 +1,24 @@
-﻿@page
+@page
 @using Car_Inspection.EndPoint.Razor.Pages.FrontPages
 @model Car_Inspection.EndPoint.Razor.Pages.FrontPages.LandingPageModel
 @{
-    Layout = "Layouts/_FrontLayout";
-    ViewData["Title"] = "صفحات اصلی";
+  Layout = "Layouts/_FrontLayout";
+  ViewData["Title"] = "صفحات اصلی";
 }
 
-@section VendorStyles {
-    <link rel="stylesheet" href="~/vendor/libs/nouislider/nouislider.dist.css" />
-    <link rel="stylesheet" href="~/vendor/libs/swiper/swiper.dist.css" />
-    <link rel="stylesheet" href="~/vendor/libs/bs-stepper/bs-stepper.dist.css" />
-    <link rel="stylesheet" href="~/vendor/libs/bootstrap-select/bootstrap-select.dist.css" />
-    <link rel="stylesheet" href="~/vendor/libs/select2/select2.dist.css" />
+@section VendorStyles{
+  <link rel="stylesheet" href="~/vendor/libs/nouislider/nouislider.dist.css" />
+  <link rel="stylesheet" href="~/vendor/libs/swiper/swiper.dist.css" />
+  <link rel="stylesheet" href="~/vendor/libs/bs-stepper/bs-stepper.dist.css" />
+  <link rel="stylesheet" href="~/vendor/libs/bootstrap-select/bootstrap-select.dist.css" />
+  <link rel="stylesheet" href="~/vendor/libs/select2/select2.dist.css" />
 }
 @section PageStyles {
-    <link rel="stylesheet" href="~/vendor/css/pages/front-page-landing.dist.css" />
+<link rel="stylesheet" href="~/vendor/css/pages/front-page-landing.dist.css" />
 }
-@section VendorScripts {
-    <script src="~/vendor/libs/nouislider/nouislider.dist.js"></script>
-    <script src="~/vendor/libs/swiper/swiper.dist.js"></script>
+@section VendorScripts{
+<script src="~/vendor/libs/nouislider/nouislider.dist.js"></script>
+<script src="~/vendor/libs/swiper/swiper.dist.js"></script>
     <script src="~/vendor/libs/bs-stepper/bs-stepper.dist.js"></script>
     <script src="~/vendor/libs/bootstrap-select/bootstrap-select.dist.js"></script>
     <script src="~/vendor/libs/bootstrap-select/i18n/defaults-fa_IR.dist.js"></script>
@@ -37,33 +37,33 @@
 
 @* ************** Content ************** *@
 <div data-bs-spy="scroll" class="scrollspy-example">
-    <!-- Hero: Start -->
-    <section id="hero-animation">
-        <div id="landingHero" class="section-py landing-hero position-relative">
-            <div class="container">
-                <div class="hero-text-box text-center">
-                    <h1 class="text-primary hero-title display-6 fw-bold ">
-                        ثبت نوبت معاینه فنی خودرو
-                    </h1>
-                    <h2 class="hero-sub-title h6 mb-4 mt-2 pb-1 lh-2">
-                        با بهترین خدمات و کیفیت
-                        <br class="d-none d-lg-block" />
-                        همراه با گارانتی ، پشتیبانی و شخصی سازی آسان
-                    </h2>
-                    <div class="landing-hero-btn d-inline-block position-relative">
-                        <span class="hero-btn-item position-absolute d-none d-md-flex text-heading">
-                            فرصت استثناییءء
-                            <img alt="پیکان انجمن" class="scaleX-n1-rtl" src="~/img/front-pages/icons/Join-community-arrow.png" />
-                        </span>
-                        <a class="btn btn-primary btn-lg" href="#landingPricing">خـرید از پشمکی</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Hero: Start -->
+  <section id="hero-animation">
+      <div id="landingHero" class="section-py landing-hero position-relative">
+          <div class="container">
+              <div class="hero-text-box text-center">
+                  <h1 class="text-primary hero-title display-6 fw-bold ">
+                     ثبت نوبت معاینه فنی خودرو
+                  </h1>
+                  <h2 class="hero-sub-title h6 mb-4 mt-2 pb-1 lh-2">
+                      با بهترین خدمات و کیفیت
+                      <br class="d-none d-lg-block"/>
+                      همراه با گارانتی ، پشتیبانی و شخصی سازی آسان
+                  </h2>
+                  <div class="landing-hero-btn d-inline-block position-relative">
+                      <span class="hero-btn-item position-absolute d-none d-md-flex text-heading">
+                          فرصت استثناییءء
+                          <img alt="پیکان انجمن" class="scaleX-n1-rtl" src="~/img/front-pages/icons/Join-community-arrow.png"/>
+                      </span>
+                      <a class="btn btn-primary btn-lg" href="#landingPricing">خـرید از پشمکی</a>
+                  </div>
+              </div>
+          </div>
+      </div>
 
-
-
-        @* form wizard *@
+    
+    
+      @* form wizard *@
         <div class="col-12 mb-4">
 
             <div class="bs-stepper wizard-icons wizard-icons-example mt-2">
@@ -342,94 +342,96 @@
                 </div>
             </div>
         </div>
+    
+
+
+  </section>
+  
+  
+  <!-- Hero: End -->
 
 
 
-    </section>
 
+  <!-- Contact Us: Start -->
+  <section id="landingContact" class="section-py bg-body landing-contact">
+    <div class="container">
+      <div class="text-center mb-3 pb-1">
+        <span class="badge bg-label-primary">ارتباط با ما</span>
+      </div>
+      <h3 class="text-center mb-3 fw-medium">
+        <span class="position-relative fw-bold z-1 section-title">ارتباط مستقیم با تیم ما
+        </span>
 
-    <!-- Hero: End -->
-    <!-- Contact Us: Start -->
-    <section id="landingContact" class="section-py bg-body landing-contact">
-        <div class="container">
-            <div class="text-center mb-3 pb-1">
-                <span class="badge bg-label-primary">ارتباط با ما</span>
-            </div>
-            <h3 class="text-center mb-3 fw-medium">
-                <span class="position-relative fw-bold z-1 section-title">
-                    ارتباط مستقیم با تیم ما
-                </span>
-
-            </h3>
-            <p class="text-center mb-4 mb-lg-5 pb-md-3">هر سوال یا نکته ای؟ فقط برای ما این پایین بنویس</p>
-            <div class="row gy-4">
-                <div class="col-lg-5">
-                    <div class="contact-img-box position-relative border p-2 h-100">
-                        <img src="~/img/front-pages/icons/contact-border.png" alt="contact border" class="contact-border-img position-absolute d-none d-md-block scaleX-n1-rtl" />
-                        <img src="~/img/front-pages/landing-page/contact-customer-service.png" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" />
-                        <div class="pt-3 px-4 pb-1">
-                            <div class="row gy-3 gx-md-4">
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <div class="d-flex align-items-center">
-                                        <div class="badge bg-label-primary rounded p-2 me-2"><i class="ti ti-mail ti-sm"></i></div>
-                                        <div>
-                                            <p class="mb-1">ایمیل</p>
-                                            <h5 class="mb-0">
-                                                <a href="mailto:example@gmail.com" class="text-heading">example@gmail.com</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-12 col-xl-6">
-                                    <div class="d-flex align-items-center">
-                                        <div class="badge bg-label-success rounded p-2 me-2">
-                                            <i class="ti ti-phone-call ti-sm"></i>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1">تلفن</p>
-                                            <h5 class="mb-0"><a href="tel:+1234-568-963" class="text-heading">+1234 568 963</a></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+      </h3>
+      <p class="text-center mb-4 mb-lg-5 pb-md-3">هر سوال یا نکته ای؟ فقط برای ما این پایین بنویس</p>
+      <div class="row gy-4">
+        <div class="col-lg-5">
+          <div class="contact-img-box position-relative border p-2 h-100">
+            <img src="~/img/front-pages/icons/contact-border.png" alt="contact border" class="contact-border-img position-absolute d-none d-md-block scaleX-n1-rtl" />
+            <img src="~/img/front-pages/landing-page/contact-customer-service.png" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" />
+            <div class="pt-3 px-4 pb-1">
+              <div class="row gy-3 gx-md-4">
+                <div class="col-md-6 col-lg-12 col-xl-6">
+                  <div class="d-flex align-items-center">
+                    <div class="badge bg-label-primary rounded p-2 me-2"><i class="ti ti-mail ti-sm"></i></div>
+                    <div>
+                      <p class="mb-1">ایمیل</p>
+                      <h5 class="mb-0">
+                        <a href="mailto:example@gmail.com" class="text-heading">example@gmail.com</a>
+                      </h5>
                     </div>
+                  </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-2">ارتباط با ما</h4>
-                            <p class="mb-4">
-                                اگر صحبتی با ما دارید لطفا در باکس زیر بنویسید مثل انتقادات و پیشنهادات ، همکاری،
-                                <br class="d-none d-lg-block" />
-                                شراکت، و ... ما در خدمت شما هستیم.
-                            </p>
-                            <form>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label" for="contact-form-fullname">نام و نام خانوادگی</label>
-                                        <input class="form-control" id="contact-form-fullname" placeholder="امیر" type="text" />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label" for="contact-form-email">ایمیل</label>
-                                        <input class="form-control" id="contact-form-email" placeholder="johndoe@gmail.com" type="text" />
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label" for="contact-form-message">پیام</label>
-                                        <textarea class="form-control" id="contact-form-message" placeholder="پیام خود را بنویسید" rows="8"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary" type="submit">ارسال پیام</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                <div class="col-md-6 col-lg-12 col-xl-6">
+                  <div class="d-flex align-items-center">
+                    <div class="badge bg-label-success rounded p-2 me-2">
+                      <i class="ti ti-phone-call ti-sm"></i>
                     </div>
+                    <div>
+                      <p class="mb-1">تلفن</p>
+                      <h5 class="mb-0"><a href="tel:+1234-568-963" class="text-heading">+1234 568 963</a></h5>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-    <!-- Contact Us: End -->
+        <div class="col-lg-7">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="mb-2">ارتباط با ما</h4>
+              <p class="mb-4"> اگر صحبتی با ما دارید لطفا در باکس زیر بنویسید مثل انتقادات و پیشنهادات ، همکاری،
+                <br class="d-none d-lg-block"/>
+                شراکت، و ... ما در خدمت شما هستیم.
+              </p>
+              <form>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label" for="contact-form-fullname">نام و نام خانوادگی</label>
+                    <input class="form-control" id="contact-form-fullname" placeholder="امیر" type="text"/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="contact-form-email">ایمیل</label>
+                    <input class="form-control" id="contact-form-email" placeholder="johndoe@gmail.com" type="text"/>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="contact-form-message">پیام</label>
+                    <textarea class="form-control" id="contact-form-message" placeholder="پیام خود را بنویسید" rows="8"></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary" type="submit">ارسال پیام</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Contact Us: End -->
 </div>
 
 
