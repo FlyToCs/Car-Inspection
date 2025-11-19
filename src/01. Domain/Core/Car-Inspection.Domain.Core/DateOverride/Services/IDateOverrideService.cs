@@ -6,4 +6,6 @@ public interface IDateOverrideService
 {
     bool Create(CreateDateOverrideDto createDateOverride);
     List<DateOverrideDto> GetAll();
+    bool IsDateBlocked(DateOnly date);
+    int? GetMaxCapacityForDate(DateOnly date);
 }

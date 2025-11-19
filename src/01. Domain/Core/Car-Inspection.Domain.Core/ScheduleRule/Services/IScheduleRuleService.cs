@@ -6,4 +6,6 @@ public interface IScheduleRuleService
 {
     bool Create(CreateScheduleRuleDto scheduleRuleDto);
     List<ScheduleRuleDto> GetAll();
+    bool IsCarModelAllowedOnDay(int carModelId, DayOfWeek dayOfWeek);
+    bool IsCompanyAllowedOnDay(int companyId, DayOfWeek appointmentDayOfWeek);
 }

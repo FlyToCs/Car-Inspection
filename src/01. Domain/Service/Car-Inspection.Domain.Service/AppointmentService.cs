@@ -20,4 +20,24 @@ public class AppointmentService(IAppointmentRepository appointmentRepo) : IAppoi
     {
         return appointmentRepo.GetAllPending();
     }
+
+    public int GetCountByDate(DateOnly date)
+    {
+        return appointmentRepo.GetCountByDate(date);
+    }
+
+    public bool ChangeStatusToConfirmed(int appointmentId)
+    {
+        return appointmentRepo.ChangeStatusToConfirmed(appointmentId);
+    }
+
+    public bool ChangeStatusToRejected(int appointmentId)
+    {
+        return appointmentRepo.ChangeStatusToRejected(appointmentId);
+    }
+
+    public bool Delete(int appointmentId)
+    {
+        return appointmentRepo.Delete(appointmentId);
+    }
 }

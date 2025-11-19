@@ -15,4 +15,14 @@ public class ScheduleRuleService(IScheduleRuleRepository scheduleRuleRepo) : ISc
     {
         return scheduleRuleRepo.GetAll();
     }
+
+    public bool IsCarModelAllowedOnDay(int carModelId, DayOfWeek dayOfWeek)
+    {
+        return scheduleRuleRepo.IsCarModelAllowedOnDay(carModelId, dayOfWeek);
+    }
+
+    public bool IsCompanyAllowedOnDay(int companyId, DayOfWeek appointmentDayOfWeek)
+    {
+        return scheduleRuleRepo.IsCompanyAllowedOnDay(companyId, appointmentDayOfWeek);
+    }
 }

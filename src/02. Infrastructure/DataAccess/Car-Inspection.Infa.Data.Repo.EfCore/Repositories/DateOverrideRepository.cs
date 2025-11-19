@@ -33,4 +33,16 @@ public class DateOverrideRepository(AppDbContext context) : IDateOverrideReposit
             CompanyId = d.CompanyId
         }).ToList();
     }
+
+    public bool IsDateBlocked(DateOnly date)
+    {
+        return context.DateOverrides.Any(d => d.SpecificDate == date && d.IsClosed);
+    }
+
+    public int? GetMaxCapacityForDate(DateOnly date)
+    {
+        var dateOverride = context.DateOverrides
+            .FirstOrDefault(d => d.SpecificDate == date);
+        return dateOverride?.NewCapacity;
+    }
 }

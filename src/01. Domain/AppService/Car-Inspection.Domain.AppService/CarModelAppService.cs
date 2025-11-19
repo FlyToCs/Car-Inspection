@@ -11,4 +11,9 @@ public class CarModelAppService(ICarModelService carModelService) : ICarModelApp
     {
         return carModelService.GetAllByCompany(companyId);
     }
+
+    public List<CarModelDto> GetAll()
+    {
+        return carModelService.GetAll();
+    }
 }

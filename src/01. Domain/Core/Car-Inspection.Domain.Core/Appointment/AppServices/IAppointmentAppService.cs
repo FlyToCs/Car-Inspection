@@ -8,4 +8,7 @@ public interface IAppointmentAppService
     Result<bool> Create(CreateAppointmentDto appointmentDto);
     List<AppointmentDto> GetAll();
     List<AppointmentDto> GetAllPending();
+    Result<bool> Confirm(int appointmentId);
+    Result<bool> Reject(int appointmentId);
+    Result<bool> Delete(int appointmentId);
 }

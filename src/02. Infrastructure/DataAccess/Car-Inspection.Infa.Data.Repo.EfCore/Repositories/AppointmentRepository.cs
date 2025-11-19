@@ -3,6 +3,7 @@ using Car_Inspection.Domain.Core.Appointment.DTOs;
 using Car_Inspection.Domain.Core.Appointment.Entities;
 using Car_Inspection.Domain.Core.Appointment.Enums;
 using Car_Inspection.Infa.Db.SqlServer.EfCore.DbContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace Car_Inspection.Infa.Data.Repo.EfCore.Repositories;
 
@@ -21,7 +22,8 @@ public class AppointmentRepository(AppDbContext context) : IAppointmentRepositor
             OwnerNationalId = appointmentDto.OwnerNationalId,
             OwnerAddress = appointmentDto.OwnerAddress,
             CarModelId = appointmentDto.CarModelId,
-            UserId = appointmentDto.UserId
+            UserId = appointmentDto.UserId,
+            Status = AppointmentStatus.Pending
         };
         context.Appointments.Add(appointment);
         return context.SaveChanges() > 0;
@@ -65,5 +67,33 @@ public class AppointmentRepository(AppDbContext context) : IAppointmentRepositor
                 CarModelId = a.CarModelId,
                 UserId = a.UserId
             }).ToList();
+    }
+
+    public int GetCountByDate(DateOnly date)
+    {
+        return context.Appointments
+            .Count(a => a.AppointmentDate == date);
+    }
+
+    public bool ChangeStatusToConfirmed(int appointmentId)
+    {
+       var result =  context.Appointments.Where(a => a.Id == appointmentId).ExecuteUpdate(setter => setter.SetProperty(
+            a => a.Status, AppointmentStatus.Approved
+        ));
+        return result > 0;
+    }
+
+    public bool ChangeStatusToRejected(int appointmentId)
+    {
+        var result = context.Appointments.Where(a => a.Id == appointmentId).ExecuteUpdate(setter => setter.SetProperty(
+            a => a.Status, AppointmentStatus.Rejected
+        ));
+        return result > 0;
+    }
+
+    public bool Delete(int appointmentId)
+    {
+        var result = context.Appointments.Where(a => a.Id == appointmentId).ExecuteDelete();
+        return result > 0;
     }
 }

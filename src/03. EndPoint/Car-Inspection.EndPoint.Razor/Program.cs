@@ -23,6 +23,7 @@ using Car_Inspection.Domain.Core.User.Services;
 using Car_Inspection.Domain.Service;
 using Car_Inspection.Infa.Data.Repo.EfCore.Repositories;
 using Car_Inspection.Infa.Db.SqlServer.EfCore.DbContext;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -60,6 +61,16 @@ builder.Services.AddScoped<IDateOverrideRepository, DateOverrideRepository>();
 builder.Services.AddScoped<IScheduleRuleRepository, ScheduleRuleRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<ICarModelRepository, CarModelRepository>();
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login"; 
+        options.AccessDeniedPath = "/AccessDenied"; 
+        options.ExpireTimeSpan = TimeSpan.FromDays(30); 
+    });
+builder.Services.AddScoped<CookieManagementService>();
 
 
 

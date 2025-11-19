@@ -17,4 +17,29 @@ public class CarModelRepository(AppDbContext context) : ICarModelRepository
             
             }).ToList();
     }
+
+    public List<CarModelDto> GetAll()
+    {
+        return context.CarModels
+            .Select(c => new CarModelDto()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                CompanyId = c.CompanyId
+            }).ToList();
+    }
+
+    public int GetCompanyIdByCarModelId(int carModelId)
+    {
+        return context.CarModels
+            .Where(c => c.Id == carModelId)
+            .Select(c => c.CompanyId)
+            .FirstOrDefault();
+    }
+
+    public bool IsCompanyAllowedOnDay(int companyId, DayOfWeek appointmentDayOfWeek)
+    {
+        return context.Set<Domain.Core.ScheduleRule.Entities.ScheduleRule>()
+            .Any(sr => sr.DayOfWeek == appointmentDayOfWeek && sr.CompanyId == companyId);
+    }
 }

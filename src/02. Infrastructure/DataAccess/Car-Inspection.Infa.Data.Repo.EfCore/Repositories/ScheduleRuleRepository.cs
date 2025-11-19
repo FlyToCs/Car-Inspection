@@ -1,4 +1,5 @@
-﻿using Car_Inspection.Domain.Core.ScheduleRule.Data;
+﻿using Car_Inspection.Domain.Core.CarModel.Entities;
+using Car_Inspection.Domain.Core.ScheduleRule.Data;
 using Car_Inspection.Domain.Core.ScheduleRule.DTOs;
 using Car_Inspection.Domain.Core.ScheduleRule.Entities;
 using Car_Inspection.Infa.Db.SqlServer.EfCore.DbContext;
@@ -29,5 +30,21 @@ public class ScheduleRuleRepository(AppDbContext context) : IScheduleRuleReposit
                 DefaultCapacity = sr.DefaultCapacity,
                 CompanyId = sr.CompanyId
             }).ToList();
+    }
+
+    public bool IsCompanyAllowedOnDay(int companyId, DayOfWeek dayOfWeek)
+    {
+        return context.Set<ScheduleRule>()
+            .Any(sr => sr.DayOfWeek == dayOfWeek && sr.CompanyId == companyId);
+    }
+
+    public bool IsCarModelAllowedOnDay(int carModelId, DayOfWeek dayOfWeek)
+    {
+        var companyId = context.Set<CarModel>()
+            .Where(cm => cm.Id == carModelId)
+            .Select(cm => cm.CompanyId)
+            .FirstOrDefault();
+        return context.Set<ScheduleRule>()
+            .Any(sr => sr.DayOfWeek == dayOfWeek && sr.CompanyId == companyId);
     }
 }

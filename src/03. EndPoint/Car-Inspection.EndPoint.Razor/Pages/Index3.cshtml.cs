@@ -1,43 +1,37 @@
-﻿using Car_Inspection.Domain.Core.Appointment.AppServices;
+using Car_Inspection.Domain.Core.Appointment.AppServices;
 using Car_Inspection.Domain.Core.Appointment.DTOs;
-using Car_Inspection.Domain.Core.CarModel.AppServices;
-using Car_Inspection.Domain.Core.CarModel.DTOs;
-using Car_Inspection.Domain.Core.Company.AppServices; 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Car_Inspection.EndPoint.Razor.Pages
 {
-    public class IndexModel(IAppointmentAppService appointmentAppService,
-        ICarModelAppService carModelAppService,
-        ICompanyAppService companyAppService) : PageModel
+    public class Index3Model(IAppointmentAppService appointmentAppService) : PageModel
     {
+
+
+
         [BindProperty]
         public CreateAppointmentDto Appointment { get; set; }
 
-        public List<CarModelDto> CarModels { get; set; }
+
         public List<AppointmentDto> Appointments { get; set; }
 
         public void OnGet()
         {
-            CarModels = carModelAppService.GetAll();
+
             Appointments = appointmentAppService.GetAll();
         }
 
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
-            {
-                CarModels = carModelAppService.GetAll();
                 return Page();
-            }
 
             var result = appointmentAppService.Create(Appointment);
 
             if (!result.IsSuccess)
             {
-                ModelState.AddModelError(string.Empty, result.Message!);
-                CarModels = carModelAppService.GetAll();
+                ModelState.AddModelError(string.Empty, result.Message);
                 return Page();
             }
 

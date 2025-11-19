@@ -15,4 +15,14 @@ public class DateOverrideService(IDateOverrideRepository dateOverrideRepo) : IDa
     {
         return dateOverrideRepo.GetAll();
     }
+
+    public bool IsDateBlocked(DateOnly date)
+    {
+        return dateOverrideRepo.IsDateBlocked(date);
+    }
+
+    public int? GetMaxCapacityForDate(DateOnly date)
+    {
+        return dateOverrideRepo.GetMaxCapacityForDate(date);
+    }
 }

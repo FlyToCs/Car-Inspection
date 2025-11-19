@@ -10,4 +10,19 @@ public class CarModelService(ICarModelRepository carModelRepo): ICarModelService
     {
         return carModelRepo.GetAllByCompany(companyId);
     }
+
+    public List<CarModelDto> GetAll()
+    {
+        return carModelRepo.GetAll();
+    }
+
+    public int GetCompanyIdByCarModelId(int carModelId)
+    {
+        return carModelRepo.GetCompanyIdByCarModelId(carModelId);
+    }
+
+    public bool IsCompanyAllowedOnDay(int companyId, DayOfWeek appointmentDayOfWeek)
+    {
+        return carModelRepo.IsCompanyAllowedOnDay(companyId, appointmentDayOfWeek);
+    }
 }

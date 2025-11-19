@@ -6,4 +6,6 @@ public interface IScheduleRuleRepository
 {
     bool Create(CreateScheduleRuleDto scheduleRuleDto);
     List<ScheduleRuleDto> GetAll();
+    bool IsCompanyAllowedOnDay(int companyId, DayOfWeek dayOfWeek);
+    bool IsCarModelAllowedOnDay(int carModelId, DayOfWeek dayOfWeek);
 }
