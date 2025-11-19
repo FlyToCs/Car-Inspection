@@ -29,5 +29,20 @@ public class CompanyConfigs : IEntityTypeConfiguration<Company>
                .WithOne(d => d.Company)
                .HasForeignKey(d => d.CompanyId)
                .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasData(
+            new Company
+            {
+                Id = 1,
+                Name = "سایپا",
+                CreatedAt = new DateTime(2024, 1, 1)
+            },
+            new Company
+            {
+                Id = 2,
+                Name = "ایران خودرو",
+                CreatedAt = new DateTime(2024, 1, 1)
+            }
+        );
     }
 }

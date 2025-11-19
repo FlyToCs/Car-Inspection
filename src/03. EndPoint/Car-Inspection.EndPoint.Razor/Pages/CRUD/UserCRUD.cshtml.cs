@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Car_Inspection.EndPoint.Razor.Data;
+using Car_Inspection.EndPoint.Razor.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Car_Inspection.EndPoint.Razor.Models;
-using Car_Inspection.EndPoint.Razor.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Car_Inspection.EndPoint.Razor.Pages.CRUD
 {
@@ -14,21 +14,21 @@ namespace Car_Inspection.EndPoint.Razor.Pages.CRUD
   public class UserCRUDModel : PageModel
   {
     // The UserContext class is a DbContext class that defines the database context
-    private readonly UserContext _context;
+    //private readonly UserContext _context;
 
     // The UserCRUDModel constructor accepts a UserContext object as a parameter
 
-    public UserCRUDModel(UserContext context)
-    {
-      // Assign the UserContext object to the _context field
-      _context = context;
-      Users = new List<User>(); // Initialize Users list
-      AvailableRolesSelectList = new SelectList(new List<string>()); // Initialize AvailableRolesSelectList
-      AvailablePlansSelectList = new SelectList(new List<string>()); // Initialize AvailablePlansSelectList
+    //public UserCRUDModel(UserContext context)
+    //{
+    //   Assign the UserContext object to the _context field
+    //  _context = context;
+    //  Users = new List<User>(); // Initialize Users list
+    //  AvailableRolesSelectList = new SelectList(new List<string>()); // Initialize AvailableRolesSelectList
+    //  AvailablePlansSelectList = new SelectList(new List<string>()); // Initialize AvailablePlansSelectList
 
-      // Initialize NewUser
-      NewUser = new User();
-    }
+    //   Initialize NewUser
+    //  NewUser = new User();
+    //}
 
     [BindProperty]
     // The NewUser property is a User object that is used to store data from the form
@@ -59,7 +59,7 @@ namespace Car_Inspection.EndPoint.Razor.Pages.CRUD
     public async Task OnGetAsync()
     {
       // Load all users from the database
-      Users = await _context.User.ToListAsync();
+      //Users = await _context.User.ToListAsync();
 
       // Create select lists for available roles and plans
       AvailableRolesSelectList = new SelectList(GetAvailableRoles());
@@ -83,8 +83,8 @@ namespace Car_Inspection.EndPoint.Razor.Pages.CRUD
       if (NewUser?.UserName != null && NewUser?.Email != null)
       {
         // Add a new user to the database
-        _context.User.Add(NewUser);
-        await _context.SaveChangesAsync();
+        //_context.User.Add(NewUser);
+        //await _context.SaveChangesAsync();
         return RedirectToPage();
       }
 
@@ -94,33 +94,33 @@ namespace Car_Inspection.EndPoint.Razor.Pages.CRUD
     // The OnPostEditOrUpdateAsync method is called when the Edit User form is submitted
     public async Task<IActionResult> OnPostEditOrUpdateAsync(int id)
     {
-      var userToUpdate = await _context.User.FindAsync(id);
-      if (userToUpdate == null)
-      {
-        return NotFound();
-      }
+      //var userToUpdate = await _context.User.FindAsync(id);
+      //if (userToUpdate == null)
+      //{
+      //  return NotFound();
+      //}
 
-      // Update user properties based on form data
-      string? isVerifiedString = Request.Form["user.IsVerified"];
-      userToUpdate.IsVerified = (isVerifiedString == "on") ? true : false;
+      //// Update user properties based on form data
+      //string? isVerifiedString = Request.Form["user.IsVerified"];
+      //userToUpdate.IsVerified = (isVerifiedString == "on") ? true : false;
 
-      // Update the user in the database and save changes
-      await TryUpdateModelAsync(userToUpdate, "user", u => u.UserName, u => u.Email, u => u.IsVerified, u => u.ContactNumber, u => u.SelectedRole, u => u.SelectedPlan);
-      await _context.SaveChangesAsync();
+      //// Update the user in the database and save changes
+      //await TryUpdateModelAsync(userToUpdate, "user", u => u.UserName, u => u.Email, u => u.IsVerified, u => u.ContactNumber, u => u.SelectedRole, u => u.SelectedPlan);
+      //await _context.SaveChangesAsync();
       return RedirectToPage();
     }
 
     // The OnPostDeleteAsync method is called when the Delete User form is submitted
     public async Task<IActionResult> OnPostDeleteAsync(int id)
     {
-      var user = await _context.User.FindAsync(id);
+      //var user = await _context.User.FindAsync(id);
 
-      if (user != null)
-      {
-        // Remove the user from the database
-        _context.User.Remove(user);
-        await _context.SaveChangesAsync();
-      }
+      //if (user != null)
+      //{
+      //  // Remove the user from the database
+      //  _context.User.Remove(user);
+      //  await _context.SaveChangesAsync();
+      //}
 
       return RedirectToPage();
     }

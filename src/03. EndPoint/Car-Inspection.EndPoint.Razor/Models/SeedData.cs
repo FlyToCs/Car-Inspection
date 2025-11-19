@@ -10,14 +10,14 @@ namespace Car_Inspection.EndPoint.Razor.Models
   {
     public static void Initialize(IServiceProvider serviceProvider)
     {
-      using (var context = new UserContext(
-          serviceProvider.GetRequiredService<DbContextOptions<UserContext>>()))
+      //using (var context = new UserContext(
+      //    serviceProvider.GetRequiredService<DbContextOptions<UserContext>>()))
       {
         // Check if there is already data in the database
-        if (context.User.Any())
-        {
-          return; // Database has been seeded
-        }
+        //if (context.User.Any())
+        //{
+        //  return; // Database has been seeded
+        //}
 
         // Seed some sample data
         var users = new User[]
@@ -85,8 +85,8 @@ namespace Car_Inspection.EndPoint.Razor.Models
         // Add more user data as needed below...
         };
 
-        context.User.AddRange(users);
-        context.SaveChanges();
+        //context.User.AddRange(users);
+        //context.SaveChanges();
       }
     }
   }

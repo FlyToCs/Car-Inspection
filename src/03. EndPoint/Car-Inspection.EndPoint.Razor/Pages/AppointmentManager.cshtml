@@ -1,6 +1,6 @@
 ﻿@page
 @using Car_Inspection.EndPoint.Razor.Pages.Tables.DataTables
-@model BasicDataTablesModel
+@model AppointmentManagerModel
 @{
     ViewData["Title"] = "جداول داده‌ای - پایه";
 }
@@ -31,12 +31,59 @@
     <script src="~/vendor/libs/&#64;form-validation/umd/plugin-auto-focus/index.min.js"></script>
 }
 
-@section PageScripts {
+@* @section PageScripts {
     <script src="~/js/tables-datatables-basic.dist.js"></script>
-}
+} *@
 
 @* ************** Content ************** *@
 
+
+<div class="card">
+    <div class="card-datatable table-responsive pt-0">
+        
+
+        <table class="datatables-basic table">
+            <thead>
+            <tr>
+                <th>شناسه</th>
+                <th>نام و نام خانوادگی</th>
+                <th>تاریخ نوبت</th>
+                <th>پلاک</th>
+                <th>سال تولید</th>
+                <th>شماره مالک</th>
+                <th>کد ملی مالک</th>
+                <th>وضعیت</th>
+                <th>مدل خودرو</th>
+                <th>عملیات</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var appointment in Model.Appointments)
+            {
+                <tr>
+                    <td>@appointment.Id</td>
+                        <td>@appointment.</td>
+                    <td>@appointment.AppointmentDate.ToString("yyyy/MM/dd")</td>
+                    <td>@appointment.LicensePlate</td>
+                    <td>@appointment.ProductionYear</td>
+                    <td>@appointment.OwnerMobile</td>
+                    <td>@appointment.OwnerNationalId</td>
+                    <td>@appointment.Status</td>
+                    <td>@appointment.CarModelId</td>
+                    <td>
+                        <!-- Example: Edit/Delete buttons -->
+                        <button class="btn btn-sm btn-primary">ویرایش</button>
+                        <button class="btn btn-sm btn-danger">حذف</button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@* 
 
 <!-- DataTable with Buttons -->
 <div class="card">
@@ -119,3 +166,4 @@
 </div>
 <!--/ DataTable with Buttons -->
 
+ *@

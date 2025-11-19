@@ -24,7 +24,7 @@ using Car_Inspection.Domain.Service;
 using Car_Inspection.Infa.Data.Repo.EfCore.Repositories;
 using Car_Inspection.Infa.Db.SqlServer.EfCore.DbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,12 +64,9 @@ builder.Services.AddScoped<ICarModelRepository, CarModelRepository>();
 
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

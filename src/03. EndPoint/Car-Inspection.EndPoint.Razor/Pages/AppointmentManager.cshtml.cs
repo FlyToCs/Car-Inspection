@@ -1,12 +1,16 @@
-using Microsoft.AspNetCore.Mvc;
+
+using Car_Inspection.Domain.Core.Appointment.AppServices;
+using Car_Inspection.Domain.Core.Appointment.DTOs;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Car_Inspection.EndPoint.Razor.Pages
+public class AppointmentManagerModel(IAppointmentAppService appointmentAppService): PageModel
 {
-    public class AppointmentManagerModel : PageModel
+
+    public List<AppointmentDto> Appointments { get; set; }
+
+    public void OnGet()
     {
-        public void OnGet()
-        {
-        }
+        // Call GetAll and assign to property
+        Appointments = appointmentAppService.GetAll();
     }
 }

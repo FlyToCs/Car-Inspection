@@ -1,4 +1,5 @@
 ﻿using Car_Inspection.Domain.Core.User.Entities;
+using Car_Inspection.Domain.Core.User.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,6 +19,69 @@ public class UserConfigs : IEntityTypeConfiguration<User>
         builder.Property(u => u.ImgUrl).HasMaxLength(100);
 
         builder.HasMany(u=>u.Appointments).WithOne(a=>a.User).HasForeignKey(a=>a.UserId);
+
+        builder.HasData(
+            // Admin
+            new User
+            {
+                Id = 1,
+                FirstName = "محمدحسین",
+                LastName = "دهقانی",
+                UserName = "admin",
+                PasswordHash = "Ntbi9dzykpCIkY2SS2CsAA==:1ILjnLtYlBsO6QJDJ4qOlh7Ul7z1ws3SIBUEW62MEjU=",
+                Role = RoleEnum.Admin,
+                ImgUrl = null,
+                CreatedAt = new DateTime(2024, 1, 1)
+            },
+
+            // Operators
+            new User
+            {
+                Id = 2,
+                FirstName = "مهدی",
+                LastName = "کریمی",
+                UserName = "operator1",
+                PasswordHash = "Ntbi9dzykpCIkY2SS2CsAA==:1ILjnLtYlBsO6QJDJ4qOlh7Ul7z1ws3SIBUEW62MEjU=",
+                Role = RoleEnum.Operator,
+                ImgUrl = null,
+                CreatedAt = new DateTime(2024, 1, 1)
+            },
+            new User
+            {
+                Id = 3,
+                FirstName = "سارا",
+                LastName = "موسوی",
+                UserName = "operator2",
+                PasswordHash = "Ntbi9dzykpCIkY2SS2CsAA==:1ILjnLtYlBsO6QJDJ4qOlh7Ul7z1ws3SIBUEW62MEjU=",
+                Role = RoleEnum.Operator,
+                ImgUrl = null,
+                CreatedAt = new DateTime(2024, 1, 1)
+            },
+
+            // Members
+            new User
+            {
+                Id = 4,
+                FirstName = "علی",
+                LastName = "محمودی",
+                UserName = "member1",
+                PasswordHash = "Ntbi9dzykpCIkY2SS2CsAA==:1ILjnLtYlBsO6QJDJ4qOlh7Ul7z1ws3SIBUEW62MEjU=",
+                Role = RoleEnum.Customer,
+                ImgUrl = null,
+                CreatedAt = new DateTime(2024, 1, 1)
+            },
+            new User
+            {
+                Id = 5,
+                FirstName = "زهرا",
+                LastName = "احمدی",
+                UserName = "member2",
+                PasswordHash = "Ntbi9dzykpCIkY2SS2CsAA==:1ILjnLtYlBsO6QJDJ4qOlh7Ul7z1ws3SIBUEW62MEjU=",
+                Role = RoleEnum.Customer,
+                ImgUrl = null,
+                CreatedAt = new DateTime(2024, 1, 1)
+            }
+        );
 
     }
 }
