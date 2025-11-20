@@ -74,7 +74,7 @@
                         <div class="card-body">
 
 
-                        
+
                             <form method="post" enctype="multipart/form-data">
 
                                 <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4" role="alert"></div>
@@ -119,8 +119,37 @@
                                         <span asp-validation-for="Appointment.AppointmentDate" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label" for="LicensePlate">پلاک خودرو <span class="text-danger">*</span></label>
-                                        <input class="form-control" id="LicensePlate" name="Appointment.LicensePlate" value="@Model.Appointment?.LicensePlate" placeholder="12ب345ایران67" type="text" />
+                                        <label class="form-label d-block" for="LicensePlateParts">پلاک خودرو <span class="text-danger">*</span></label>
+
+                                        <div class="d-flex border border-dark rounded overflow-hidden shadow-sm" id="PlaqueInputContainer">
+
+                                            <div class="d-flex flex-column justify-content-center align-items-center bg-dark text-white p-1" style="width: 40px; border-left: 1px solid #dee2e6;">
+                                                <div style="height: 4px; background-color: green; width: 100%;"></div>
+                                                <div style="height: 4px; background-color: white; width: 100%;"></div>
+                                                <div style="height: 4px; background-color: red; width: 100%;"></div>
+                                                <small style="font-size: 8px;">I.R. IRAN</small>
+                                            </div>
+
+                                            <div class="d-flex align-items-center flex-grow-1 bg-white p-1">
+
+                                                <input class="form-control text-center border-0 border-end border-dark p-0 h-100" id="PlaquePart1" type="text" maxlength="2" placeholder="۰۱" style="font-size: 1.5rem; max-width: 50px;" dir="ltr" />
+
+                                                <input class="form-control text-center border-0 border-end border-dark p-0 h-100" id="PlaquePart2" type="text" maxlength="1" placeholder="ب" style="font-size: 1.5rem; max-width: 50px;" />
+
+                                                <input class="form-control text-center border-0 border-end border-dark p-0 h-100" id="PlaquePart3" type="text" maxlength="3" placeholder="۲۳۴" style="font-size: 1.5rem; max-width: 90px;" dir="ltr" />
+
+                                                <div class="text-center fw-bold px-1" style="width: 50px; font-size: 0.9rem;">
+                                                    ایران
+                                                    <div class="text-dark">
+                                                        <input class="form-control text-center border-0 p-0 h-100" id="PlaquePart4" type="text" maxlength="2" placeholder="۵۶" style="font-size: 1.2rem; max-width: 35px; display: inline-block;" dir="ltr" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <input type="hidden" id="LicensePlate" name="Appointment.LicensePlate" value="@Model.Appointment?.LicensePlate" />
+
+                                        </div>
                                         <span asp-validation-for="Appointment.LicensePlate" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-6">
@@ -132,7 +161,7 @@
                                                 @foreach (var item in @Model.CarModels)
                                                 {
                                                     <option  value="@item.Id"   
-                                                                                            selected="@(Model.Appointment?.CarModelId == item.Id)">
+                                                             selected="@(Model.Appointment?.CarModelId == item.Id)">
                                                         @item.Name 
                                                         </option>
                                                     }
@@ -146,7 +175,7 @@
                                         <span asp-validation-for="Appointment.ProductionYear" class="text-danger"></span>
                                     </div>
 
-                               
+
                                     <div class="col-12">
                                         <label class="form-label" for="CarImages">بارگذاری تصاویر خودرو (حداکثر ۱۰ فایل)</label>
                                         <input type="file" name="CarImages" id="CarImages" multiple class="form-control" accept="image/*" />
@@ -172,6 +201,80 @@
     </section>
 
 </div>
+
+@section PageScripts {
+    <script>
+        $(document).ready(function () {
+            const plateParts = ['#PlaquePart1', '#PlaquePart2', '#PlaquePart3', '#PlaquePart4'];
+
+            function updateLicensePlate() {
+                var fullPlate = plateParts.map(id => $(id).val()).join('');
+                $('#LicensePlate').val(fullPlate);
+            }
+
+            $(plateParts.join(', ')).on('input', function () {
+                updateLicensePlate();
+
+                const $this = $(this);
+                const currentId = '#' + $this.attr('id');
+                const maxLength = parseInt($this.attr('maxlength'));
+
+                if ($this.val().length === maxLength) {
+                    const currentIndex = plateParts.indexOf(currentId);
+                    if (currentIndex < plateParts.length - 1) {
+                        $(plateParts[currentIndex + 1]).focus();
+                    }
+                }
+            });
+
+
+            $(plateParts.join(', ')).on('keydown', function (e) {
+                const $this = $(this);
+                const currentId = '#' + $this.attr('id');
+                const currentIndex = plateParts.indexOf(currentId);
+
+
+                if (e.keyCode === 39) {
+                    if (currentIndex < plateParts.length - 1) {
+                        e.preventDefault();
+                        $(plateParts[currentIndex + 1]).focus();
+                    }
+                }
+
+                else if (e.keyCode === 37 || (e.keyCode === 8 && $this.val().length === 0)) {
+                    if (currentIndex > 0) {
+                        e.preventDefault();
+                        $(plateParts[currentIndex - 1]).focus();
+                        if (e.keyCode === 8) {
+                           const prevField = $(plateParts[currentIndex - 1])[0];
+                           const prevLength = prevField.value.length;
+                           if (prevField.setSelectionRange) {
+                               prevField.setSelectionRange(prevLength, prevLength);
+                           } else if (prevField.createTextRange) {
+                               var range = prevField.createTextRange();
+                               range.collapse(true);
+                               range.moveEnd('character', prevLength);
+                               range.moveStart('character', prevLength);
+                               range.select();
+                           }
+                        }
+                    }
+                }
+            });
+
+
+            var initialFullPlate = $('#LicensePlate').val();
+            if (initialFullPlate && initialFullPlate.length >= 8) {
+                $('#PlaquePart1').val(initialFullPlate.substring(0, 2));
+                $('#PlaquePart2').val(initialFullPlate.substring(2, 3));
+                $('#PlaquePart3').val(initialFullPlate.substring(3, 6));
+                $('#PlaquePart4').val(initialFullPlate.substring(6, 8));
+            }
+
+            updateLicensePlate();
+        });
+    </script>
+}
 
 
 @await Html.PartialAsync("Layouts/Sections/_Scripts" + ViewData["frontVar"])
