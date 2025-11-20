@@ -108,4 +108,9 @@ public class AppointmentAppService(
         return Result<bool>.Failure($"حذف نوبت با شناسه {appointmentId} با شکست مواجه شد.");
 
     }
+
+    public List<AppointmentDto> GetAllFiltered(DateOnly? date, string? companyName)
+    {
+        return appointmentService.GetAllFiltered(date, companyName);
+    }
 }

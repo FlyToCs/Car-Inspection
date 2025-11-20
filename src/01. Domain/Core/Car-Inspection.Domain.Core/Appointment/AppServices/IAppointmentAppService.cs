@@ -11,4 +11,5 @@ public interface IAppointmentAppService
     Result<bool> Confirm(int appointmentId);
     Result<bool> Reject(int appointmentId);
     Result<bool> Delete(int appointmentId);
+    List<AppointmentDto> GetAllFiltered(DateOnly? date, string? companyName);
 }

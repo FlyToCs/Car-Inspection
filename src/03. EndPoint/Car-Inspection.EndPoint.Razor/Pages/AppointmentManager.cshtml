@@ -42,124 +42,127 @@
     }
 
     <div class="card-header border-bottom">
-        <h5 class="card-title">فیلتر نوبت‌ها</h5>
-        <div class="d-flex justify-content-between align-items-center row pb-2 pt-4">
+        <h5 class="card-title">فیلتر نوبت‌ها (جستجوی سمت سرور)</h5>
 
+  
+        <form method="get" class="pb-2 pt-4">
+            <div class="d-flex justify-content-between align-items-center row">
 
-            <div class="col-md-4 mb-2">
-                <label class="form-label">تاریخ نوبت:</label>
-                <input type="text" id="appointmentDateFilter" class="form-control" placeholder="انتخاب تاریخ" />
+                <div class="col-md-4 mb-2">
+                    <label class="form-label" for="appointmentDateFilter">تاریخ نوبت:</label>
+                   
+                    <input type="text" id="appointmentDateFilter" name="FilterDate" class="form-control flatpickr-jdate" 
+                           placeholder="انتخاب تاریخ" value="@Model.FilterDate" />
+                </div>
+
+             
+                <div class="col-md-4 mb-2">
+                    <label class="form-label" for="companyFilter">کمپانی (دسته بندی):</label>
+
+                    <select id="companyFilter" name="FilterCompanyName" class="form-select text-capitalize">
+                        <option value="">همه کمپانی‌ها</option>
+                        @foreach (var company in Model.Companies)
+                        {
+                            <option value="@company.Name" selected="@(Model.FilterCompanyName == company.Name)">@company.Name</option>
+                        }
+                    </select>
+                </div>
+
+     
+                <div class="col-md-4 mb-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="ti ti-search me-1"></i> جستجو
+                    </button>
+                    <a asp-page="./AppointmentManager" class="btn btn-outline-secondary">
+                        <i class="ti ti-rotate-2 me-1"></i> بازنشانی
+                    </a>
+                </div>
             </div>
-
-           
-            <div class="col-md-4 mb-2">
-                <label class="form-label">کمپانی (دسته بندی):</label>
-                <select id="companyFilter" class="form-select text-capitalize">
-                    <option value="">همه کمپانی‌ها</option>
-                    @foreach (var company in Model.Companies)
-                    {
-                        <option value="@company.Name">@company.Name</option>
-                    }
-                </select>
-            </div>
-
-        </div>
+        </form>
     </div>
 
     <div class="card-datatable table-responsive pt-0">
 
         <table class="datatables-basic table">
             <thead>
-                <tr>
-                    <th>شناسه</th> 
-                    <th>نام و نام خانوادگی</th> 
-                    <th>تاریخ نوبت</th> 
-                   
-                    <th>سال تولید</th> 
-                    <th>شماره مالک</th> 
-                    <th>کد ملی مالک</th> 
-                    <th>مدل خودرو</th> 
-                    <th>وضعیت</th> 
-                    <th>عملیات</th> 
-                </tr>
+            <tr>
+                <th>شناسه</th>
+                <th>نام و نام خانوادگی</th>
+                <th>تاریخ نوبت</th>
+                <th>پلاک</th> 
+                <th>سال تولید</th>
+                <th>شماره مالک</th>
+                <th>کد ملی مالک</th>
+                <th>مدل خودرو</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var appointment in Model.Appointments)
-                {
-                    var carModelName = Model.CarModelNames.GetValueOrDefault(appointment.CarModelId, "نامشخص");
-                    var statusString = appointment.Status.ToString();
-                    var statusClass = statusString == "Confirmed" ? "success" :
+            @foreach (var appointment in Model.Appointments)
+            {
+                var carModelName = Model.CarModelNames.GetValueOrDefault(appointment.CarModelId, "نامشخص");
+                var statusString = appointment.Status.ToString();
+                var statusClass = statusString == "Confirmed" ? "success" :
                     statusString == "Rejected" ? "danger" : "secondary";
 
-                    <tr>
-                        <td>@appointment.Id</td>
-                        <td>@appointment.OwnerFirstName @appointment.OwnerLastName</td>
-                        <td>@appointment.AppointmentDate.ToString("yyyy/MM/dd")</td> 
-                        <td>@appointment.LicensePlate</td>
-                        <td>@appointment.ProductionYear</td>
-                        <td>@appointment.OwnerMobile</td>
-                        <td>@appointment.OwnerNationalId</td>
-                        <td>@carModelName</td> 
-                        <td><span class="badge bg-label-@statusClass">@statusString</span></td>
-                        <td>
-                            <form method="post" class="d-inline">
+                <tr>
+                    <td>@appointment.Id</td>
+                    <td>@appointment.OwnerFirstName @appointment.OwnerLastName</td>
+                    <td>@appointment.AppointmentDate.ToString("yyyy/MM/dd")</td>
+                    <td>@appointment.LicensePlate</td>
+                    <td>@appointment.ProductionYear</td>
+                    <td>@appointment.OwnerMobile</td>
+                    <td>@appointment.OwnerNationalId</td>
+                    <td>@carModelName</td>
+                    <td><span class="badge bg-label-@statusClass">@statusString</span></td>
+                    <td>
+                        <form method="post" class="d-inline">
 
+                            @if (appointment.Status.ToString() != "Confirmed" && appointment.Status.ToString() != "Rejected")
+                            {
                                 <button asp-page-handler="Confirm" asp-route-id="@appointment.Id"
                                         class="btn btn-sm btn-success">
                                     تایید
                                 </button>
-                               
+
                                 <button asp-page-handler="Reject" asp-route-id="@appointment.Id"
                                         class="btn btn-sm btn-primary">
                                     رد
                                 </button>
-                            
-                                <button asp-page-handler="Delete" asp-route-id="@appointment.Id"
-                                        class="btn btn-sm btn-danger">
-                                    حذف
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                }
+                            }
+                            <button asp-page-handler="Delete" asp-route-id="@appointment.Id"
+                                    class="btn btn-sm btn-danger">
+                                حذف
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
 
     </div>
 </div>
 
+                                    
 @section PageScripts {
 
-   
     <script>
         $(document).ready(function () {
-
-         
-            var dt_basic = $('.datatables-basic').DataTable({
-                order: [[2, 'desc']], 
-           
-            });
-
-           
-            var dateFilterInstance = flatpickr("#appointmentDateFilter", {
+  
+            flatpickr(".flatpickr-jdate", { 
                 locale: "fa",
                 altInput: true,
-                altFormat: "Y/m/d",
-                dateFormat: "Y/m/d",
+                altFormat: "Y/m/d", 
+                dateFormat: "Y/m/d", 
 
-                onChange: function(selectedDates, dateStr, instance) {
-                 
-                    dt_basic.column(2).search(dateStr ? dateStr : '', false, false).draw();
-                }
             });
 
+            $('.datatables-basic').DataTable({
+                order: [[2, 'desc']],
 
-            $('#companyFilter').on('change', function () {
-                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-              
-                dt_basic.column(7).search(val ? val : '', false, true).draw();
             });
-
         });
     </script>
 }

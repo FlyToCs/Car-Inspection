@@ -40,4 +40,9 @@ public class AppointmentService(IAppointmentRepository appointmentRepo) : IAppoi
     {
         return appointmentRepo.Delete(appointmentId);
     }
+
+    public List<AppointmentDto> GetAllFiltered(DateOnly? date, string? companyName)
+    {
+        return appointmentRepo.GetAllFiltered(date, companyName);
+    }
 }

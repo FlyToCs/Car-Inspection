@@ -96,4 +96,32 @@ public class AppointmentRepository(AppDbContext context) : IAppointmentRepositor
         var result = context.Appointments.Where(a => a.Id == appointmentId).ExecuteDelete();
         return result > 0;
     }
+
+    public List<AppointmentDto> GetAllFiltered(DateOnly? date, string? companyName)
+    {
+        var query = context.Appointments.AsQueryable();
+        if (date.HasValue)
+        {
+            query = query.Where(a => a.AppointmentDate == date.Value);
+        }
+        if (!string.IsNullOrEmpty(companyName))
+        {
+            query = query.Where(a => a.CarModel.Company.Name.Contains(companyName));
+        }
+        return query.Select(a => new AppointmentDto()
+        {
+            Id = a.Id,
+            AppointmentDate = a.AppointmentDate,
+            LicensePlate = a.LicensePlate,
+            ProductionYear = a.ProductionYear,
+            OwnerFirstName = a.OwnerFirstName,
+            OwnerLastName = a.OwnerLastName,
+            OwnerMobile = a.OwnerMobile,
+            OwnerNationalId = a.OwnerNationalId,
+            OwnerAddress = a.OwnerAddress,
+            Status = a.Status,
+            CarModelId = a.CarModelId,
+            UserId = a.UserId
+        }).ToList();
+    }
 }

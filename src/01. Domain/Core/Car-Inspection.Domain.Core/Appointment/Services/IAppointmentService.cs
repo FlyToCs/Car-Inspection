@@ -11,4 +11,5 @@ public interface IAppointmentService
     bool ChangeStatusToConfirmed(int appointmentId);
     bool ChangeStatusToRejected(int appointmentId);
     bool Delete(int appointmentId);
+    List<AppointmentDto> GetAllFiltered(DateOnly? date, string? companyName);
 }

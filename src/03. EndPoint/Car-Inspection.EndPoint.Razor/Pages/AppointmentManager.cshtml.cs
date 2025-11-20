@@ -3,9 +3,11 @@ using Car_Inspection.Domain.Core.Appointment.DTOs;
 using Car_Inspection.Domain.Core.CarModel.AppServices;
 using Car_Inspection.Domain.Core.Company.AppServices;
 using Car_Inspection.Domain.Core.Company.DTOs;
+using Car_Inspection.EndPoint.Razor.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace Car_Inspection.EndPoint.Razor.Pages;
@@ -14,8 +16,17 @@ namespace Car_Inspection.EndPoint.Razor.Pages;
 public class AppointmentManagerModel(
     IAppointmentAppService appointmentAppService,
     ICarModelAppService carModelAppService,
-    ICompanyAppService companyAppService) : PageModel
+    ICompanyAppService companyAppService,
+    IPersianDateConverterService persianDateConverterService) : PageModel
 {
+
+
+    [BindProperty(SupportsGet = true)]
+    public string? FilterDate { get; set; } 
+
+    [BindProperty(SupportsGet = true)]
+    public string? FilterCompanyName { get; set; } 
+
     public List<AppointmentDto> Appointments { get; set; }
     public List<CompanyDto> Companies { get; set; }
     public Dictionary<int, string> CarModelNames { get; set; } = new Dictionary<int, string>();
@@ -24,13 +35,16 @@ public class AppointmentManagerModel(
     public void OnGet()
     {
    
-        Appointments = appointmentAppService.GetAll();
+        DateOnly? filterGregorianDate = persianDateConverterService.ToGregorianDate(FilterDate);
+
+        Appointments = appointmentAppService.GetAllFiltered(filterGregorianDate, FilterCompanyName);
+
         Companies = companyAppService.GetAll();
         var allCarModels = carModelAppService.GetAll();
         CarModelNames = allCarModels.ToDictionary(m => m.Id, m => m.Name);
     }
 
-   
+
     public IActionResult OnPostConfirm(int id)
     {
         var result = appointmentAppService.Confirm(id); 

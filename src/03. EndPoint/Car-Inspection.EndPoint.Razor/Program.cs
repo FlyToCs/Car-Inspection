@@ -21,6 +21,7 @@ using Car_Inspection.Domain.Core.User.AppServices;
 using Car_Inspection.Domain.Core.User.Data;
 using Car_Inspection.Domain.Core.User.Services;
 using Car_Inspection.Domain.Service;
+using Car_Inspection.EndPoint.Razor.Services;
 using Car_Inspection.Infa.Data.Repo.EfCore.Repositories;
 using Car_Inspection.Infa.Db.SqlServer.EfCore.DbContext;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -71,6 +72,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.ExpireTimeSpan = TimeSpan.FromDays(30); 
     });
 builder.Services.AddScoped<CookieManagementService>();
+builder.Services.AddScoped<IPersianDateConverterService, PersianDateConverterService>();
 
 
 
