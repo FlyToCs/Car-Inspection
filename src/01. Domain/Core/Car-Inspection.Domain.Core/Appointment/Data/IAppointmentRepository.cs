@@ -13,4 +13,5 @@ public interface IAppointmentRepository
     bool ChangeStatusToRejected(int appointmentId);
     bool Delete(int appointmentId);
     List<AppointmentDto> GetAllFiltered(DateOnly? date, string? companyName);
+    DateOnly? GetLastAppointmentDateByLicensePlate(string licensePlate);
 }

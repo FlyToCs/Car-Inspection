@@ -2,9 +2,9 @@
 using Car_Inspection.Domain.Core.Appointment.AppServices;
 using Car_Inspection.Domain.Core.Appointment.DTOs;
 using Car_Inspection.Domain.Core.Appointment.Services;
-using Car_Inspection.Domain.Core.CarModel.AppServices;
 using Car_Inspection.Domain.Core.CarModel.Services;
 using Car_Inspection.Domain.Core.DateOverride.Services;
+using Car_Inspection.Domain.Core.RejectedAppointment.DTOs;
 using Car_Inspection.Domain.Core.RejectedAppointment.Services;
 using Car_Inspection.Domain.Core.ScheduleRule.Services;
 
@@ -14,6 +14,7 @@ public class AppointmentAppService(
     IAppointmentService appointmentService,        
     IScheduleRuleService scheduleRuleService,
     IDateOverrideService dateOverrideService,
+    IRejectedAppointmentService rejectedAppointmentService,
     ICarModelService carModelService
 ) : IAppointmentAppService
 {
@@ -24,13 +25,31 @@ public class AppointmentAppService(
         var carAge = DateTime.Now.Year - appointmentDto.ProductionYear;
         if (carAge > 5)
         {
+            rejectedAppointmentService.Create(new CreateRejectedAppointmentDto()
+            {
+                CarModelId = appointmentDto.CarModelId,
+                LicensePlate = appointmentDto.LicensePlate,
+                OwnerMobile = appointmentDto.OwnerMobile,
+                OwnerNationalId = appointmentDto.OwnerNationalId,
+                ProductionYear = appointmentDto.ProductionYear,
+                Reason = "سال تولید پایین. این خوردو برا حداقل 5 سال گذشته است"
+            });
             return Result<bool>.Failure("خودرو شما بیشتر از 5 سالشه...");
         }
 
         var appointmentDate = appointmentDto.AppointmentDate;
         var appointmentDayOfWeek = (DayOfWeek)appointmentDate.DayOfWeek;
 
-      
+        var lastAppointmentDate = appointmentService.GetLastAppointmentDateByLicensePlate(appointmentDto.LicensePlate);
+        if (lastAppointmentDate.HasValue)
+        {
+            var oneYearAgo = DateOnly.FromDateTime(DateTime.Now.AddYears(-1));
+            if (lastAppointmentDate.Value > oneYearAgo)
+            {
+                return Result<bool>.Failure("شما در ۱۲ ماه اخیر برای این پلاک نوبت ثبت کرده‌اید. لطفا پس از گذشت یک سال مجدداً اقدام کنید.");
+            }
+        }
+
         if (dateOverrideService.IsDateBlocked(appointmentDate))
         {
             return Result<bool>.Failure("تاریخ انتخاب شده، توسط مدیریت مسدود شده است.");

@@ -45,4 +45,9 @@ public class AppointmentService(IAppointmentRepository appointmentRepo) : IAppoi
     {
         return appointmentRepo.GetAllFiltered(date, companyName);
     }
+
+    public DateOnly? GetLastAppointmentDateByLicensePlate(string licensePlate)
+    {
+        return appointmentRepo.GetLastAppointmentDateByLicensePlate(licensePlate);
+    }
 }

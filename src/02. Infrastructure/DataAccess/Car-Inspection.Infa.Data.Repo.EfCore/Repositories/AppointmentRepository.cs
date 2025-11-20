@@ -130,4 +130,14 @@ public class AppointmentRepository(AppDbContext context) : IAppointmentRepositor
             CarImgUrls = a.CarImgUrls.Select(ci => ci.ImgUrl).ToList()
         }).ToList();
     }
+
+    public DateOnly? GetLastAppointmentDateByLicensePlate(string licensePlate)
+    {
+        return  context.Appointments
+            .AsNoTracking()
+            .Where(a => a.LicensePlate == licensePlate)
+            .OrderByDescending(a => a.AppointmentDate)
+            .Select(a => a.AppointmentDate)
+            .FirstOrDefault(); 
+    }
 }
