@@ -7,7 +7,7 @@ using Car_Inspection.EndPoint.Razor.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 
 namespace Car_Inspection.EndPoint.Razor.Pages;

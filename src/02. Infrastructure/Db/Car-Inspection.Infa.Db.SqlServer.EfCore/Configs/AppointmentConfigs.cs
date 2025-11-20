@@ -31,6 +31,10 @@ public class AppointmentConfigs : IEntityTypeConfiguration<Appointment>
             .HasForeignKey(a => a.UserId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        builder.HasMany(a => a.CarImgUrls)
+            .WithOne(ci => ci.Appointment)
+            .HasForeignKey(ci => ci.AppointmentId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasData(
           new Appointment

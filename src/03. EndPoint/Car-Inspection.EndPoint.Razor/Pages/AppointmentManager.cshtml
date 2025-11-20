@@ -44,18 +44,17 @@
     <div class="card-header border-bottom">
         <h5 class="card-title">فیلتر نوبت‌ها (جستجوی سمت سرور)</h5>
 
-  
+
         <form method="get" class="pb-2 pt-4">
             <div class="d-flex justify-content-between align-items-center row">
 
                 <div class="col-md-4 mb-2">
                     <label class="form-label" for="appointmentDateFilter">تاریخ نوبت:</label>
-                   
-                    <input type="text" id="appointmentDateFilter" name="FilterDate" class="form-control flatpickr-jdate" 
-                           placeholder="انتخاب تاریخ" value="@Model.FilterDate" />
+                    <input type="text" id="appointmentDateFilter" name="FilterDate" class="form-control flatpickr-jdate"
+                                         placeholder="انتخاب تاریخ" value="@Model.FilterDate" />
                 </div>
 
-             
+
                 <div class="col-md-4 mb-2">
                     <label class="form-label" for="companyFilter">کمپانی (دسته بندی):</label>
 
@@ -68,7 +67,7 @@
                     </select>
                 </div>
 
-     
+
                 <div class="col-md-4 mb-2 d-flex align-items-end">
                     <button type="submit" class="btn btn-primary me-2">
                         <i class="ti ti-search me-1"></i> جستجو
@@ -85,83 +84,135 @@
 
         <table class="datatables-basic table">
             <thead>
-            <tr>
-                <th>شناسه</th>
-                <th>نام و نام خانوادگی</th>
-                <th>تاریخ نوبت</th>
-                <th>پلاک</th> 
-                <th>سال تولید</th>
-                <th>شماره مالک</th>
-                <th>کد ملی مالک</th>
-                <th>مدل خودرو</th>
-                <th>وضعیت</th>
-                <th>عملیات</th>
-            </tr>
+                <tr>
+                    <th>شناسه</th>
+                    <th>نام و نام خانوادگی</th>
+                    <th>تاریخ نوبت</th>
+                    <th>پلاک</th>
+                    <th>سال تولید</th>
+                    <th>شماره مالک</th>
+                    <th>کد ملی مالک</th>
+                    <th>مدل خودرو</th>
+                    <th>تصاویر</th> 
+                    <th>وضعیت</th> 
+                    <th>عملیات</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var appointment in Model.Appointments)
-            {
-                var carModelName = Model.CarModelNames.GetValueOrDefault(appointment.CarModelId, "نامشخص");
-                var statusString = appointment.Status.ToString();
-                var statusClass = statusString == "Confirmed" ? "success" :
+                @foreach (var appointment in Model.Appointments)
+                {
+                    var carModelName = Model.CarModelNames.GetValueOrDefault(appointment.CarModelId, "نامشخص");
+                    var statusString = appointment.Status.ToString();
+                    var statusClass = statusString == "Confirmed" ? "success" :
                     statusString == "Rejected" ? "danger" : "secondary";
 
-                <tr>
-                    <td>@appointment.Id</td>
-                    <td>@appointment.OwnerFirstName @appointment.OwnerLastName</td>
-                    <td>@appointment.AppointmentDate.ToString("yyyy/MM/dd")</td>
-                    <td>@appointment.LicensePlate</td>
-                    <td>@appointment.ProductionYear</td>
-                    <td>@appointment.OwnerMobile</td>
-                    <td>@appointment.OwnerNationalId</td>
-                    <td>@carModelName</td>
-                    <td><span class="badge bg-label-@statusClass">@statusString</span></td>
-                    <td>
-                        <form method="post" class="d-inline">
+                    <tr>
+                        <td>@appointment.Id</td>
+                        <td>@appointment.OwnerFirstName @appointment.OwnerLastName</td>
+                        <td>@appointment.AppointmentDate.ToString("yyyy/MM/dd")</td>
+                        <td>@appointment.LicensePlate</td>
+                        <td>@appointment.ProductionYear</td>
+                        <td>@appointment.OwnerMobile</td>
+                        <td>@appointment.OwnerNationalId</td>
+                        <td>@carModelName</td>
 
-                            @if (appointment.Status.ToString() != "Confirmed" && appointment.Status.ToString() != "Rejected")
+                        <td>
+                            @if (appointment.CarImgUrls != null && appointment.CarImgUrls.Any())
                             {
-                                <button asp-page-handler="Confirm" asp-route-id="@appointment.Id"
-                                        class="btn btn-sm btn-success">
-                                    تایید
-                                </button>
-
-                                <button asp-page-handler="Reject" asp-route-id="@appointment.Id"
-                                        class="btn btn-sm btn-primary">
-                                    رد
-                                </button>
+                                <a href="javascript:void(0)"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#imageModal_@appointment.Id"
+                                   class="text-primary fw-bold"
+                                   title="مشاهده @appointment.CarImgUrls.Count تصویر">
+                                    <i class="ti ti-photo me-1"></i>
+                                    (@appointment.CarImgUrls.Count)
+                                </a>
                             }
-                            <button asp-page-handler="Delete" asp-route-id="@appointment.Id"
-                                    class="btn btn-sm btn-danger">
-                                حذف
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </td>
+
+                        <td><span class="badge bg-label-@statusClass">@statusString</span></td>
+                        <td>
+                            <form method="post" class="d-inline">
+
+                                @if (appointment.Status.ToString() != "Confirmed" && appointment.Status.ToString() != "Rejected")
+                                {
+                                    <button asp-page-handler="Confirm" asp-route-id="@appointment.Id"
+                                                                  class="btn btn-sm btn-success">
+                                        تایید
+                                    </button>
+
+                                    <button asp-page-handler="Reject" asp-route-id="@appointment.Id"
+                                                                  class="btn btn-sm btn-primary">
+                                        رد
+                                    </button>
+                                }
+                                <button asp-page-handler="Delete" asp-route-id="@appointment.Id"
+                                                            class="btn btn-sm btn-danger">
+                                    حذف
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
 
     </div>
 </div>
 
-                                    
+
+
+
+@foreach (var appointment in Model.Appointments.Where(a => a.CarImgUrls != null && a.CarImgUrls.Any()))
+{
+    <div class="modal fade" id="imageModal_@appointment.Id" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+  
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">تصاویر نوبت شماره @appointment.Id - @appointment.OwnerFirstName @appointment.OwnerLastName</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        @foreach (var url in appointment.CarImgUrls)
+                        {
+                            <div class="col-md-4 col-sm-6 mb-3">
+            
+                                <img src="@url" alt="تصویر خودرو" class="img-fluid rounded shadow-sm" style="max-height: 250px; object-fit: cover; width: 100%;" />
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
 @section PageScripts {
 
     <script>
         $(document).ready(function () {
-  
-            flatpickr(".flatpickr-jdate", { 
+
+            
+            flatpickr(".flatpickr-jdate", {
                 locale: "fa",
                 altInput: true,
-                altFormat: "Y/m/d", 
-                dateFormat: "Y/m/d", 
-
+                altFormat: "Y/m/d",
+                dateFormat: "Y/m/d",
             });
 
+           
             $('.datatables-basic').DataTable({
                 order: [[2, 'desc']],
-
             });
         });
     </script>

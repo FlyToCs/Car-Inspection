@@ -23,4 +23,6 @@ public class Appointment : BaseEntity
     public int? UserId { get; set; }
     public User.Entities.User User { get; set; }
 
+    public List<CarImg> CarImgUrls { get; set; }
+
 }

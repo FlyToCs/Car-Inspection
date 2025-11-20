@@ -23,7 +23,10 @@ public class AppointmentRepository(AppDbContext context) : IAppointmentRepositor
             OwnerAddress = appointmentDto.OwnerAddress,
             CarModelId = appointmentDto.CarModelId,
             UserId = appointmentDto.UserId,
-            Status = AppointmentStatus.Pending
+            Status = AppointmentStatus.Pending,
+            CarImgUrls = appointmentDto.CarImgUrls
+                .Select(url => new CarImg { ImgUrl = url })
+                .ToList()
         };
         context.Appointments.Add(appointment);
         return context.SaveChanges() > 0;
@@ -44,7 +47,8 @@ public class AppointmentRepository(AppDbContext context) : IAppointmentRepositor
             OwnerAddress = a.OwnerAddress,
             Status = a.Status,
             CarModelId = a.CarModelId,
-            UserId = a.UserId
+            UserId = a.UserId,
+            CarImgUrls = a.CarImgUrls.Select(ci => ci.ImgUrl).ToList()
         }).ToList();
     }
 
@@ -65,7 +69,8 @@ public class AppointmentRepository(AppDbContext context) : IAppointmentRepositor
                 OwnerAddress = a.OwnerAddress,
                 Status = a.Status,
                 CarModelId = a.CarModelId,
-                UserId = a.UserId
+                UserId = a.UserId,
+                CarImgUrls = a.CarImgUrls.Select(ci => ci.ImgUrl).ToList()
             }).ToList();
     }
 
@@ -121,7 +126,8 @@ public class AppointmentRepository(AppDbContext context) : IAppointmentRepositor
             OwnerAddress = a.OwnerAddress,
             Status = a.Status,
             CarModelId = a.CarModelId,
-            UserId = a.UserId
+            UserId = a.UserId,
+            CarImgUrls = a.CarImgUrls.Select(ci => ci.ImgUrl).ToList()
         }).ToList();
     }
 }

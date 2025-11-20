@@ -27,7 +27,7 @@
 
 
 
-@* ************** Content ************** *@
+
 <div data-bs-spy="scroll" class="scrollspy-example">
     <section id="hero-animation">
         <div id="landingHero" class="section-py landing-hero position-relative">
@@ -74,7 +74,8 @@
                         <div class="card-body">
 
 
-                            <form method="post">
+                        
+                            <form method="post" enctype="multipart/form-data">
 
                                 <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4" role="alert"></div>
 
@@ -130,8 +131,8 @@
                                             {
                                                 @foreach (var item in @Model.CarModels)
                                                 {
-                                                    <option  value="@item.Id"  
-                                                             selected="@(Model.Appointment?.CarModelId == item.Id)">
+                                                    <option  value="@item.Id"   
+                                                                                            selected="@(Model.Appointment?.CarModelId == item.Id)">
                                                         @item.Name 
                                                         </option>
                                                     }
@@ -143,6 +144,12 @@
                                         <label class="form-label" for="ProductionYear">سال ساخت</label>
                                         <input class="form-control" id="ProductionYear" name="Appointment.ProductionYear" value="@Model.Appointment?.ProductionYear" placeholder="1395" type="number" min="1350" max="@DateTime.Now.Year.ToString()" />
                                         <span asp-validation-for="Appointment.ProductionYear" class="text-danger"></span>
+                                    </div>
+
+                               
+                                    <div class="col-12">
+                                        <label class="form-label" for="CarImages">بارگذاری تصاویر خودرو (حداکثر ۱۰ فایل)</label>
+                                        <input type="file" name="CarImages" id="CarImages" multiple class="form-control" accept="image/*" />
                                     </div>
 
                                 </div>

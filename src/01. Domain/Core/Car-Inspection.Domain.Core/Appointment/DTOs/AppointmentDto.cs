@@ -16,4 +16,5 @@ public class AppointmentDto
     public AppointmentStatus Status { get; set; }
     public int CarModelId { get; set; }
     public int? UserId { get; set; }
+    public List<string>? CarImgUrls { get; set; } = [];
 }

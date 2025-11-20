@@ -14,4 +14,5 @@ public class CreateAppointmentDto
     public string OwnerAddress { get; set; }
     public int CarModelId { get; set; }
     public int? UserId { get; set; }
+    public List<string> CarImgUrls { get; set; }
 }

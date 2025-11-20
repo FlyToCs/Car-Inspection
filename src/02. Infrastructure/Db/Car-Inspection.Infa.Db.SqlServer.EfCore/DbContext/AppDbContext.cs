@@ -19,6 +19,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : Microsoft.En
     public DbSet<Company> Companies { get; set; }
     public DbSet<DateOverride> DateOverrides { get; set; }
     public DbSet<ScheduleRule> ScheduleRules { get; set; }
+    public DbSet<CarImg> CarImgs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
