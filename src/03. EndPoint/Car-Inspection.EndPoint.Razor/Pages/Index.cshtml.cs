@@ -22,12 +22,12 @@ namespace Car_Inspection.EndPoint.Razor.Pages
         public List<IFormFile> CarImages { get; set; } = new List<IFormFile>();
 
         public List<CarModelDto> CarModels { get; set; }
-        public List<AppointmentDto> Appointments { get; set; }
+        //public List<AppointmentDto> Appointments { get; set; }
 
         public void OnGet()
         {
             CarModels = carModelAppService.GetAll();
-            Appointments = appointmentAppService.GetAll();
+            //Appointments = appointmentAppService.GetAll();
         }
 
         public IActionResult OnPost()
@@ -38,8 +38,7 @@ namespace Car_Inspection.EndPoint.Razor.Pages
             //    return Page();
             //}
 
-           
-            const string folder = "car_inspection_uploads";
+            string folder = "car_inspection_uploads";
             List<string> imgUrls = fileUploaderService.UploadImages(CarImages, folder);
             Appointment.CarImgUrls = imgUrls;
             var result = appointmentAppService.Create(Appointment);
